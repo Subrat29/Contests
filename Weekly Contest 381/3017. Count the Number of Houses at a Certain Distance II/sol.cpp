@@ -3,13 +3,25 @@
 #include <queue>
 using namespace std;
 
+// TLE: 507/549
+
 // jabbhi minimum path ki baat ho aur weights na de rkhe ho to bfs lgao
 // because defaultly it traverse with minimum path
 
-vector<int> countOfPairs(int n, int x, int y)
+vector<long long> countOfPairs(int n, int x, int y)
 {
+    vector<long long> ans(n,0);
+    if (x == y)
+    {
+        for (int i = 1; i < n; i++)
+        {
+            ans[i-1] = (2 * (n - i));
+        }
+        return ans;
+    }
+
     // adj list
-    vector<vector<int>> adj(n + 1);
+    vector<vector<long long>> adj(n + 1);
     for (int i = 1; i < n; i++)
     {
         adj[i].push_back(i + 1);
@@ -20,12 +32,10 @@ vector<int> countOfPairs(int n, int x, int y)
     adj[x].push_back(y);
     adj[y].push_back(x);
 
-    vector<int> ans(n);
-
     // bfs
     for (int i = 1; i <= n; i++)
     {
-        queue<int> q;
+        queue<long long> q;
         q.push(i);
         vector<bool> visited(n + 1, false);
         visited[i] = true;

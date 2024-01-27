@@ -20,12 +20,6 @@ int minimumPushes(string word)
     return ans;
 }
 
-// "amrvxnhsewkoipjyuclgtdbfq"
-// Output:
-// 48
-// Expected:
-// 52
-
 int main()
 {
     return 0;

@@ -18,7 +18,7 @@ Welcome to the LeetCode contest repository! This repository is dedicated to the 
 
 ## Guidelines for Participants 📝
 - Please create a folder with the problem number for each problem in the contest.
-- Place your solution code (in Python, or other supported languages) in the respective problem folder.
+- Place your solution code (in C++, or other supported languages) in the respective problem folder.
 
 ## Contribution 🤝
 - If you want to contribute your solutions, feel free to create a pull request.
