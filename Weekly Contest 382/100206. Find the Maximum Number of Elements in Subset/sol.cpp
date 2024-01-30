@@ -5,12 +5,24 @@
 #include <algorithm>
 using namespace std;
 
-// [15,15,225,225,50625,50625]
-
 int main()
 {
-    vector<int> nums = {5, 4, 1, 2, 2};
+    vector<int> nums = {4, 4, 16, 256};
+
+    unordered_map<int, int> occurrenceMap;
+    for (int num : nums)
+    {
+        occurrenceMap[num]++;
+    }
+
     sort(nums.begin(), nums.end());
+
+    cout << "Print vector : ";
+    for (int i = 0; i < nums.size(); i++)
+    {
+        cout << nums[i] << " ";
+    }
+    cout << endl;
 
     int cnt = 1;
     int n, m, first;
@@ -21,15 +33,20 @@ int main()
         n = nums[i];
         vector<int> ans;
         ans.push_back(n);
+        occurrenceMap[n]--;
+        int flag = i;
         while (m != n)
         {
             m = n;
-            for (int j = i + 1; j < nums.size(); j++)
+            for (int j = flag + 1; j < nums.size(); j++)
             {
-                if (nums[j] == n * n)
+                if (nums[j] == n * n && occurrenceMap[nums[j]] > 0)
                 {
                     n = nums[j];
+                    flag = j;
                     ans.push_back(n);
+                    occurrenceMap[n]--;
+                    break;
                 }
             }
         }
@@ -38,12 +55,15 @@ int main()
         while (m != n && ans.size() > 1 && first != n)
         {
             m = n;
-            for (int j = i + 1; j < nums.size(); j++)
+            for (int j = i + 1; j < flag; j++)
             {
-                if (nums[j] == int(sqrt(n)))
+                if (nums[j] == int(sqrt(n)) && occurrenceMap[nums[j]] > 0)
                 {
                     n = nums[j];
+                    flag = j;
                     ans.push_back(n);
+                    occurrenceMap[n]--;
+                    break;
                 }
             }
         }
