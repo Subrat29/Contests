@@ -4,13 +4,9 @@
 using namespace std;
 
 // Tle
-long long flowerGame(int n, int m)
+long long flowerGame(long long n, long long m)
 {
-    if (n == 1 && m == 1)
-        return 0;
-
-    long long ans = (n * m) / 2;
-    return ans;
+    return n * m / 2;
 }
 
 int main()
