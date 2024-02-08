@@ -3,11 +3,13 @@
 #include <algorithm>
 using namespace std;
 
+// If i initialize ans vector to 0 then gives wrong answer on test case 684/810
+
 vector<vector<int>> resultGrid(vector<vector<int>> &image, int threshold)
 {
     int m = image.size();
     int n = image[0].size();
-    vector<vector<int>> ans(m, vector<int>(n, -1));
+    vector<vector<int>> ans(m, vector<int>(n, 0));
     vector<vector<int>> noOfRegion(m, vector<int>(n, 0));
 
     for (int i = 0; i < m - 2; i++)
@@ -40,10 +42,7 @@ vector<vector<int>> resultGrid(vector<vector<int>> &image, int threshold)
             {
                 for (int y = j; y < j + 3; y++)
                 {
-                    if (ans[x][y] == -1)
-                        ans[x][y] = sum;
-                    else
-                        ans[x][y] += sum;
+                    ans[x][y] += sum;
                     noOfRegion[x][y]++;
                 }
             }
@@ -54,11 +53,10 @@ vector<vector<int>> resultGrid(vector<vector<int>> &image, int threshold)
     {
         for (int j = 0; j < n; j++)
         {
-            if (ans[i][j] == -1)
+            if (ans[i][j] == 0)
                 ans[i][j] = image[i][j];
 
-            else
-                ans[i][j] = ans[i][j] / noOfRegion[i][j];
+            ans[i][j] = ans[i][j] / noOfRegion[i][j];
         }
     }
     return ans;
