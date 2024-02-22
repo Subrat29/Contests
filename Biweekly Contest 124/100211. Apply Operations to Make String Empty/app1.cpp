@@ -4,6 +4,9 @@
 #include <algorithm>
 using namespace std;
 
+// Time Limit Exceeded
+// 656 / 697 testcases passed
+
 string lastNonEmptyString(string s)
 {
     map<char, int> mp;
@@ -13,14 +16,13 @@ string lastNonEmptyString(string s)
         last = s;
         for (int i = 0; i < s.size(); i++)
         {
-            if (!mp[s[i]])
+            if (mp[s[i]] != 1)
             {
-                mp[s[i]] = 0;
+                mp[s[i]] = 1;
                 s.erase(i, 1);
                 i--;
             }
         }
-        cout << s << endl;
         mp.clear();
     }
     return last;
