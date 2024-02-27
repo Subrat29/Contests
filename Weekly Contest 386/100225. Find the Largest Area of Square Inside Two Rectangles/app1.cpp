@@ -1,23 +1,29 @@
 #include <iostream>
 #include <vector>
-#include <unordered_map>
 #include <algorithm>
 using namespace std;
 
-bool isPossibleToSplit(vector<int> &nums)
+long long largestSquareArea(vector<vector<int>> &bottomLeft, vector<vector<int>> &topRight)
 {
-    unordered_map<int, int> mp;
-    for (auto &&i : nums)
+    int n = bottomLeft.size();
+    long long maxArea = 0;
+    for (int i = 0; i < n; i++)
     {
-        mp[i]++;
-    }
+        for (int j = i + 1; j < n; j++)
+        {
+            long long min_x = max(bottomLeft[i][0], bottomLeft[j][0]);
+            long long max_x = min(topRight[i][0], topRight[j][0]);
+            long long min_y = max(bottomLeft[i][1], bottomLeft[j][1]);
+            long long max_y = min(topRight[i][1], topRight[j][1]);
 
-    for (auto &&i : mp)
-    {
-        if (i.second > 2)
-            return false;
+            if (max_x > min_x && max_y > min_y)
+            {
+                long long s = min(max_x - min_x, max_y - min_y);
+                maxArea = max(maxArea, s * s);
+            }
+        }
     }
-    return true;
+    return maxArea;
 }
 
 int main()
