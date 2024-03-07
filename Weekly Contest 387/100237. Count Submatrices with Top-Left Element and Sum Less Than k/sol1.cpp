@@ -3,56 +3,31 @@
 #include <algorithm>
 using namespace std;
 
+// Learned Prefix sum
+
 int countSubmatrices(vector<vector<int>> &grid, int k)
 {
-    int n = grid.size();
-    int m = grid[0].size();
-    int sum = 0;
     int cnt = 0;
-    vector<vector<bool>> visited(n, vector<bool>(m, false));
-
-    bool f1 = true;
-    bool f2 = true;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < grid.size(); i++)
     {
-        if (f1 == true)
-            for (int j = i; j < m; j++)
-            {
-                if (visited[i][j] == false)
-                {
-                    if (sum + grid[i][j] < k)
-                    {
-                        sum += grid[i][j];
-                        visited[i][j] = true;
-                        cnt++;
-                    }
-                    else
-                        f1 = false;
-                }
-            }
-
-        if (f2 == true)
-            for (int k = i; k < m; k++)
-            {
-                if ((visited[k][i] == false) && (sum + grid[k][i] < k))
-                {
-                    sum += grid[k][i];
-                    visited[k][i] = true;
-                    cnt++;
-                }
-                else
-                    f2 = false;
-            }
+        for (int j = 0; j < grid[0].size(); j++)
+        {
+            if (i - 1 >= 0)
+                grid[i][j] += grid[i - 1][j];
+            if (j - 1 >= 0)
+                grid[i][j] += grid[i][j - 1];
+            if (i - 1 >= 0 && j - 1 >= 0)
+                grid[i][j] -= grid[i - 1][j - 1];
+            if (grid[i][j] <= k)
+                cnt++;
+            else
+                break;
+        }
     }
     return cnt;
 }
 
 int main()
 {
-    vector<vector<int>> grid = {{7, 6, 3}, {6, 6, 1}};
-    int k = 18;
-
-    cout << " Ans: " << countSubmatrices(grid, k);
     return 0;
 }
