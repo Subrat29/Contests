@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// sc:
-// tc:
+//sc: h
+//tc: n
 
 bool isArraySpecial(vector<int> &nums)
 {
@@ -22,5 +22,6 @@ bool isArraySpecial(vector<int> &nums)
 
 int main()
 {
+    cout << "Hello World" << endl;
     return 0;
 }
